@@ -586,9 +586,18 @@ class App {
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const dx = clientX - startX;
 
-      const newWidth = Math.max(50, startWidth + dx);
       const aspectRatio = startHeight / startWidth;
-      const newHeight = Math.max(25, newWidth * aspectRatio);
+      const minWidth = 40;
+      const minHeight = minWidth * aspectRatio;
+
+      let newWidth = Math.max(minWidth, startWidth + dx);
+      let newHeight = newWidth * aspectRatio;
+
+      // If height would be too small, clamp both to maintain ratio
+      if (newHeight < minHeight) {
+        newHeight = minHeight;
+        newWidth = minWidth;
+      }
 
       sigEl.style.width = `${newWidth}px`;
       sigEl.style.height = `${newHeight}px`;
