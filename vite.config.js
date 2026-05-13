@@ -21,7 +21,7 @@ export default defineConfig({
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',
-      includeAssets: ['icons/*.svg'],
+      includeAssets: ['icons/*.svg', 'pdf.worker.js'],
       manifest: {
         name: 'PDF Sign - Tanda Tangan Digital',
         short_name: 'PDF Sign',
@@ -52,6 +52,7 @@ export default defineConfig({
         ]
       },
       workbox: {
+        maximumFileSizeToCacheInBytes: 3 * 1024 * 1024, // 3MB for pdf.worker.js
         globPatterns: ['**/*.{js,css,html,png,svg,woff2}'],
         runtimeCaching: [
           {

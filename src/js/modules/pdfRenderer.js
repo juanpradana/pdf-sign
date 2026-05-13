@@ -5,11 +5,8 @@
 
 import * as pdfjsLib from 'pdfjs-dist';
 
-// Configure worker
-pdfjsLib.GlobalWorkerOptions.workerSrc = new URL(
-  'pdfjs-dist/build/pdf.worker.mjs',
-  import.meta.url
-).toString();
+// Use worker from public folder for reliable production serving
+pdfjsLib.GlobalWorkerOptions.workerSrc = '/pdf.worker.js';
 
 export class PdfRenderer {
   constructor() {
